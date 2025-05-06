@@ -1,0 +1,113 @@
+﻿@model InitiativeVM.UpdateInitiativeVM
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <partial name="_InitiativeButtonTabs" />
+    <br />
+    <div class="card-header">
+        <a type="button" asp-controller="Initiative" asp-action="GetInitiatives">
+            <div class="btn  btn-inverse-primary  btn-rounded btn-fw">Return to the Initiatives List </div>
+        </a>
+    </div>
+    <br />
+</section>
+<form method="post">
+    <input type="text" class="form-control" asp-for="InitiativeId" readonly hidden />
+    <input type="text" class="form-control" asp-for="Status" readonly hidden />
+    <section class="card shadow-lg">
+        <div class="card-header bg-primary text-white py-3">
+            <h3 class="mb-0">
+                <i class="ti-bookmark-alt me-2"></i>Update Initiative: @Model.Title
+                <span class="badge bg-white text-primary ms-2">@Model.Status</span>
+            </h3>
+        </div>
+
+        <div class="card-body">
+            <form method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="InitiativeId" />
+                <input type="hidden" asp-for="Status" />
+
+                <div class="row g-4">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Title</label>
+                            <input type="text" class="form-control form-control-lg"
+                                   asp-for="Title" placeholder="Enter initiative title" required>
+                            <div class="invalid-feedback">Please provide a title</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Initiative Type</label>
+                            <select class="form-select form-select-lg"
+                                    asp-for="InitiativeTypeId"
+                                    asp-items="Model.InitiativeTypes" required>
+                                <option value="">Select Type</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Owner</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="ti-user"></i></span>
+                                <input type="text" class="form-control form-control-lg"
+                                       asp-for="Owner" placeholder="Enter owner name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea class="form-control form-control-lg"
+                                      asp-for="Description" rows="3"
+                                      placeholder="Brief description of the initiative"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Objective</label>
+                            <div class="border rounded-3 p-3 bg-light">
+                                <textarea class="form-control border-0 bg-transparent"
+                                          asp-for="Objective" rows="5"
+                                          placeholder="Detailed objectives..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-9">
+                                <label class="form-label fw-bold h5 mb-0">Archive Initiative</label>
+                                <p class="text-muted mb-0">Moves this initiative to archived records</p>
+                            </div>
+                            <div class="col-md-3 text-end">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox"
+                                           asp-for="IsArchived" id="archiveSwitch"
+                                           style="transform: scale(1.5); margin-right: 10px;">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-end gap-3 border-top pt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="ti-save me-2"></i>Save Changes
+                    </button>
+                    <a asp-controller="Initiative" asp-action="DeleteSoft"
+                       asp-route-id="@Model.InitiativeId"
+                       class="btn btn-outline-danger btn-lg px-5"
+                       onclick="return confirm('Permanently delete this initiative?')">
+                        <i class="ti-trash me-2"></i>Delete
+                    </a>
+                </div>
+            </form>
+        </div>
+    </section>
+</form>

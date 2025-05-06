@@ -1,0 +1,96 @@
+﻿@model RoleVM
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <h3>User Records</h3>
+    <br />
+    <div class="card-footer">
+        <a type="button" class="btn badge-info btn-icon-text" asp-controller="User" asp-action="GetUsers">
+            <i class="ti-back-left btn-icon-prepend"></i>
+            Get All Users
+        </a>
+    </div>
+    <br />
+</section>
+
+<section class="card-body">
+    <div class="content">
+        <div class="row">
+            <div class="box box-header">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <form method="post">
+                            <div class="card-header" style="text-align:center">
+                                <h4>UPDATE THE ROLES FOR <span style="color:greenyellow">@Model.User.FirstName.ToUpper() @Model.User.LastName.ToUpper()</span></h4>
+                            </div>
+                            <div class="card-body">
+                                <input asp-for="@Model.User.Id" hidden />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">First Name</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" style="color:blue" id="firstName" asp-for="User.FirstName" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Last Name</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" style="color:blue" id="lastName" asp-for="User.LastName" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Username</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" style="color:blue" id="userName" asp-for="User.UserName" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input class="form-control" style="color:blue" id="email" asp-for="User.Email" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Roles Assignment</label>
+                                            <div class="col-sm-12">
+                                                @for (int i = 0; i<Model.RoleList.Count; i++)
+                                                {
+                                                    <input asp-for="@Model.RoleList[i].RoleName" hidden />
+                                                    <input asp-for="@Model.RoleList[i].IsSelected" class="form-check-input" />
+                                                    <label class="form-check-label" asp-for="@Model.RoleList[i].IsSelected">
+                                                        @Model.RoleList[i].RoleName
+                                                    </label>
+                                                    <br/>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer right">
+                                <input type="submit" class="btn btn-warning w-100" value="Update" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

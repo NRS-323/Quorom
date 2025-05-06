@@ -1,0 +1,61 @@
+﻿@model NotificationGroupQuoromiteVM.AddMultipleNotificationGroupQuoromitesVM
+
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <h3>Add Quoromites to <span class="text-success">@Model.NotificationGroupName</span></h3>
+    <br />
+    <div class="card-header">
+        <a type="button" asp-controller="NotificationGroupQuoromite" asp-action="GetNotificationGroupQuoromite" asp-route-id="@Model.NotificationGroupId">
+            <div class="btn  btn-inverse-info">Return to the Notification Group Quoromite List for <span class="text-success">@Model.NotificationGroupName</span> </div>
+        </a>
+    </div>
+    <br />
+</section>
+
+<form asp-action="AddMultipleQuoromites" method="post">
+    <input type="hidden" asp-for="NotificationGroupId" />
+    <input type="hidden" asp-for="NotificationGroupName" />
+
+    @if (Model.Quoromites.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Quoromites.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" asp-for="@Model.Quoromites[i].IsSelected" />
+                                <input type="hidden" asp-for="@Model.Quoromites[i].QuoromiteId" />
+                                <input type="hidden" asp-for="@Model.Quoromites[i].FullName" />
+                                <input type="hidden" asp-for="@Model.Quoromites[i].Email" />
+                            </td>
+                            <td>@Model.Quoromites[i].FullName</td>
+                            <td>@Model.Quoromites[i].Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-success">Add Selected Quoromites</button>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No available Quoromites to add.
+        </div>
+    }
+</form>
+

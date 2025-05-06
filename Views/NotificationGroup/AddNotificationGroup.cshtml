@@ -1,0 +1,59 @@
+﻿@model NotificationGroupVM.AddNotificationGroupVM
+<section class="card-header">
+    <h3>Add an New Notification Group</h3>
+    <br />
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <div class="card-header">
+        <a type="button" asp-controller="NotificationGroup" asp-action="GetNotificationGroups">
+            <div class="btn  btn-inverse-info  btn-rounded btn-fw">Return to the Notification Groups </div>
+        </a>
+    </div>
+    <br />
+</section>
+<form method="post">
+    <section>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <th style="text-align:left">Notification Group Name<span style="color:red"><sup class="star">*</sup></span></th>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="middle">
+                                        <input type="text" class="form-control" asp-for="Name" />
+                                        <span class="badge badge-danger badge-pill" asp-validation-for="Name"></span>
+                                    </td>
+                                </tr>
+                                <tr><td style="padding-top:2em"></td></tr>
+                                <tr>
+                                    <th style="text-align:left">Description<span style="color:red"><sup class="star">*</sup></span></th>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="middle">
+                                        <textarea class="form-control" asp-for="Description" id="simpleMde"></textarea>
+                                        <span class="badge badge-danger badge-pill" asp-validation-for="Description"></span>
+                                        <h5 class="text-info">NB: The textbox automatically expands as text is added</h5>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer right">
+                    <button type="submit" class="btn btn-inverse-success btn-icon-text" id="save">
+                        <i class="ti-save btn-icon-prepend"></i>
+                        Save Notification Group
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

@@ -1,0 +1,247 @@
+﻿@model InitiativeTaskVM.GetInitiativeTaskListVM
+<section class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+    </div>
+</section>
+<partial name="_InitiativeButtonTabs" />
+<br />
+<h3><span class="text-success">@Model.InitiativeTitle</span> Tasks</h3>
+<br />
+<div class="card-header">
+    <a type="button" asp-controller="Initiative" asp-action="GetInitiatives">
+        <div class="btn  btn-inverse-primary  btn-rounded btn-fw">Return to the Initiatives List </div>
+    </a>
+</div>
+<style>
+    .avatar-sm {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+</style>
+
+<section class="card shadow-lg mt-5">
+    <div class="card-header bg-success text-white py-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">
+                <i class="ti-layout-list-thumb me-2"></i>Task Agenda
+                <span class="badge bg-white text-success ms-2">@Model.InitiativeTasks.Count Tasks</span>
+            </h3>
+            <a asp-controller="InitiativeTask" asp-action="AddInitiativeTask" asp-route-id="@Model.InitiativeId"
+            class="btn btn-light btn-lg">
+                <i class="ti-plus me-2"></i>Add Task
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card bg-light-success">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-sm bg-success text-white rounded-circle me-3">
+                                <i class="ti-stats-up fs-4"></i>
+                            </div>
+                            <div>
+                                <div class="text-muted">Recent Activity</div>
+                                <div class="text-truncate">
+                                    Last updated:@if(Model.InitiativeTasks.Count == 0){
+                                        <p>N/A</p>
+                                    }
+                                    else 
+                                    {
+                                        @if (Model.InitiativeTasks.Max(c => c.UpdatedOnDateTime) == null){
+                                            @Model.InitiativeTasks.Max(c => c.CreatedOnDateTime).ToString("MMM dd, yyyy @ hh:mm tt")
+                                        }
+                                        else
+                                        {
+                                            @Model.InitiativeTasks.Max(c => c.UpdatedOnDateTime).ToString("MMM dd, yyyy @ hh:mm tt")
+                                        }
+                                    }
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Task</th>
+                        <th>Planned Start</th>
+                        <th>Planned Stop</th>
+                        <th>Actual Start</th>
+                        <th>Actual Stop</th>
+                        <th>Challenges</th>
+                        <th>Responsible</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.InitiativeTasks)
+                    {
+                        <tr class="@(item.ActualStopDateTime.Year > 2000 ? "table-success" : "")">
+                            <td class="fw-bold">@(Model.InitiativeTasks.IndexOf(item) + 1)</td>
+
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span class="fw-bold">@item.Title</span>
+                                    <small class="text-muted">@item.TaskType</small>
+                                </div>
+                            </td>
+
+                            <!-- Planned Dates -->
+                            <td>
+                                @item.PlannedStartDateTime.ToString("MMM dd, yyyy @ hh:mm tt")
+                            </td>
+                            <td>
+                                @item.PlannedStopDateTime.ToString("MMM dd, yyyy @ hh:mm tt")
+                            </td>
+
+                            <!-- Actual Start Date -->
+                            <td>
+                                @if (item.ActualStartDateTime == DateTime.MinValue)
+                                {
+                                    <div id="startTimeForm_@item.InitiativeTaskId" style="display: none;">
+                                        <form asp-controller="InitiativeTask"
+                                              asp-action="UpdateActualStartDateTime"
+                                              method="post">
+                                            <input type="hidden" name="id"
+                                                   value="@item.InitiativeTaskId" />
+                                            <input type="datetime-local"
+                                                   class="form-control"
+                                                   name="actualStartDateTime"
+                                                   value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+                                                   required />
+                                            <button type="submit"
+                                                    class="btn btn-success mt-2">
+                                                Save
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <button type="button"
+                                            class="btn @(DateTime.Now > item.PlannedStartDateTime ? "btn-danger" : "btn-success")"
+                                            onclick="showStartTimeForm('@item.InitiativeTaskId')">
+                                        <i class="ti-timer"></i> Start
+                                    </button>
+                                }
+                                else
+                                {
+                                    @item.ActualStartDateTime.ToString("MMM dd, yyyy @ hh:mm tt")
+                                }
+                            </td>
+
+                            <!-- Actual Stop Date -->
+                            <td>
+                                @if (item.ActualStartDateTime != DateTime.MinValue &&
+                               item.ActualStopDateTime == DateTime.MinValue)
+                                {
+                                    <div id="stopTimeForm_@item.InitiativeTaskId"
+                                         style="display: none;">
+                                        <form asp-controller="InitiativeTask"
+                                              asp-action="UpdateActualStopDateTime"
+                                              method="post">
+                                            <input type="hidden" name="id"
+                                                   value="@item.InitiativeTaskId" />
+                                            <input type="datetime-local"
+                                                   class="form-control"
+                                                   name="actualStopDateTime"
+                                                   value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+                                                   required />
+                                            <button type="submit"
+                                                    class="btn btn-success mt-2">
+                                                Save
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <button type="button"
+                                            class="btn @(DateTime.Now > item.PlannedStopDateTime ? "btn-danger" : "btn-success")"
+                                            onclick="showStopTimeForm('@item.InitiativeTaskId')">
+                                        <i class="ti-timer"></i> Complete
+                                    </button>
+                                }
+                                else if (item.ActualStopDateTime != DateTime.MinValue)
+                                {
+                                    @item.ActualStopDateTime.ToString("MMM dd, yyyy @ hh:mm tt")
+                                }
+                                else
+                                {
+                                    <span class="text-muted"> Awaiting Task to Start</span>
+                                }
+                            </td>
+
+                            <!-- Challenges -->
+                            <td>
+                                <a asp-controller="TaskChallenge"
+                                   asp-action="GetTaskChallenges"
+                                   asp-route-id="@item.TaskId"
+                                   class="btn btn-outline-info btn-sm">
+                                    <i class="ti-comments"></i>
+                                    <span class="badge bg-danger">
+                                        @item.ChallengeCount
+                                    </span>
+                                </a>
+                            </td>
+
+                            <!-- Responsible Persons -->
+                            <td>
+                                @foreach (var person in item.Quoromites.Take(2))
+                                {
+                                    <div class="d-flex align-items-center mb-1">
+                                        <div>
+                                            <div class="fw-bold">@person.FullName</div>
+                                            <small class="text-muted">@person.Email</small>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+
+                            <!-- Actions -->
+                            <td>
+                                <a asp-controller="InitiativeTask"
+                                   asp-action="UpdateInitiativeTask"
+                                   asp-route-id="@item.InitiativeTaskId"
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="ti-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        function showStartTimeForm(taskId) {
+            document.getElementById('startTimeForm_' + taskId).style.display = 'block';
+            event.target.style.display = 'none';
+        }
+
+        function showStopTimeForm(taskId) {
+            document.getElementById('stopTimeForm_' + taskId).style.display = 'block';
+            event.target.style.display = 'none';
+        }
+        // Initialize Bootstrap components
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.forEach(tooltipTriggerEl => {
+            new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
+        flatpickr('[data-flatpickr]', {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true
+        })
+    </script>
+}

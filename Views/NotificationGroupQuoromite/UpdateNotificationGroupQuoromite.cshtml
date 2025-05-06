@@ -1,0 +1,85 @@
+﻿@model NotificationGroupQuoromiteVM.UpdateNotificationGroupQuoromiteVM
+<section class="card-header">
+    <h3>Update the <span style="color:greenyellow">@Model.NotificationGroupName</span> Group Record</h3>
+    <br />
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <div class="card-header">
+        <a type="button" asp-controller="NotificationGroupQuoromite" asp-action="GetNotificationGroupQuoromite" asp-route-id="@Model.NotificationGroupId">
+            <div class="btn btn-inverse-info">Return to the <span style="color:greenyellow">@Model.NotificationGroupName</span> Group List </div>
+        </a>
+    </div>
+    <br />
+</section>
+<form method="post">
+    <input type="text" class="form-control" asp-for="NotificationGroupQuoromiteId" readonly hidden />
+    <input type="text" class="form-control" asp-for="NotificationGroupId" readonly hidden />
+    <input type="text" class="form-control" asp-for="QuoromiteId" readonly hidden />
+    <section>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <th style="text-align:left">First Name<span style="color:red"><sup class="star">*</sup></span></th>
+                                    <th style="text-align:left">Last Name<span style="color:red"><sup class="star">*</sup></span></th>
+                                    <th style="text-align:left">Email<span style="color:red"><sup class="star">*</sup></span></th>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="middle" style="padding-right:1em">
+                                        <input type="text" class="form-control" asp-for="FirstName" />
+                                        <span class="badge badge-danger badge-pill" asp-validation-for="FirstName"></span>
+                                    </td>
+                                    <td align="left" valign="middle" style="padding-right:1em">
+                                        <input type="text" class="form-control" asp-for="LastName" />
+                                        <span class="badge badge-danger badge-pill" asp-validation-for="LastName"></span>
+                                    </td>
+                                    <td align="left" valign="middle">
+                                        <input type="text" class="form-control" asp-for="Email" />
+                                        <span class="badge badge-danger badge-pill" asp-validation-for="Email"></span>
+                                    </td>
+                                </tr>
+                                <tr><td style="padding-top:2em"></td></tr>
+                                <tr>
+                                    <th style="text-align:left">Description<span style="color:red"><sup class="star">*</sup></span></th>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="left" valign="middle">
+                                        <textarea class="form-control" asp-for="Description" id="simpleMde"></textarea>
+                                        <span class="badge badge-danger badge-pill" asp-validation-for="Description"></span>
+                                        <h5 class="text-info">NB: The textbox automatically expands as text is added</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="middle">
+                                        <label asp-for="IsActive" class="form-check-label text-muted">
+                                            Is Active?
+                                            <input asp-for="IsActive" class=" form-check-input" id="isActiveInput">
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer right">
+                    <button type="submit" class="btn btn-inverse-warning btn-icon-text">
+                        <i class="ti-save btn-icon-prepend"></i>
+                        Update Quoromite
+                    </button>
+                    <button type="submit" class="btn btn-inverse-danger btn-icon-text" asp-controller="NotificationGroupQuoromite" asp-action="DeleteSoft" asp-route-id="@Model.NotificationGroupQuoromiteId"
+                            onclick="return confirm('Are you sure?')">
+                        <i class="ti-trash btn-icon-prepend"></i>
+                        Delete Quoromite
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

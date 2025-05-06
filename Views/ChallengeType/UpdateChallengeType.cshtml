@@ -1,0 +1,98 @@
+﻿@model ChallengeTypeVM.UpdateChallengeTypeVM
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <h3>Update Challenge Type @Model.Title</h3>
+    <br />
+    <div class="card-footer">
+        <div class="card-footer">
+            <a type="button" class="btn btn-inverse-info btn-icon-text" asp-controller="ChallengeType" asp-action="GetChallengeTypes">
+                <i class="ti-back-left btn-icon-prepend"></i>
+                View All Challenge Types
+            </a>
+        </div>
+    </div>
+    <br />
+</section>
+@if (Model is null)
+{
+    <section class="card-body">
+        <div class="content">
+            <div class="row">
+                <div class="box box-header">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-header">Important Information</div>
+                            <div class="card-body">
+                                <p>No Challenge Type was found with this ID</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <form method="post">
+        <input type="text" class="form-control" asp-for="ChallengeTypeId" readonly hidden />
+        <section class="card-body">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Challenge Type Type Information</h4>
+                        <p class="card-description">
+                            Details for the this record's Challenge Type entry
+                        </p>
+                        <div class="form-group row">
+                            <label for="ClientChallengeName" class="col-sm-3 col-form-label">Challenge Type Name<span style="color:red"><sup class="star">*</sup></span></label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" asp-for="Title" />
+                                <span class="badge badge-danger badge-pill" asp-validation-for="Title"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ClientChallengeCategory" class="col-sm-3 col-form-label">Description<span style="color:red"><sup class="star">*</sup></span></label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="description" asp-for="Description" />
+                                <span class="badge badge-danger badge-pill" asp-validation-for="Description"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-9">
+                                <div class="form-check">
+                                    <label for="isActive" class="form-check-label text-muted">
+                                        <input type="checkbox" class="form-check-input" id="isActive" asp-for="IsActive" />
+                                        Is Active?
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer right">
+                        @if (User.IsInRole($"{MyConstants.QuoromRoleNames.Modifier}") || User.IsInRole($"{MyConstants.QuoromRoleNames.Administrator}") || User.IsInRole($"{MyConstants.QuoromRoleNames.SuperUser}"))
+                        {
+                            <button type="submit" class="btn btn-warning btn-icon-text">
+                                <i class="ti-save btn-icon-prepend"></i>
+                                Update @Model.Title
+                            </button>
+                        }
+                        @if (User.IsInRole($"{MyConstants.QuoromRoleNames.Deleter}") || User.IsInRole($"{MyConstants.QuoromRoleNames.Administrator}") || User.IsInRole($"{MyConstants.QuoromRoleNames.SuperUser}"))
+                        {
+                            <button type="submit" class="btn btn-danger btn-icon-text" asp-controller="ChallengeType" asp-action="DeleteSoft" asp-route-id="@Model.ChallengeTypeId"
+                                    onclick="return confirm('Are you sure?')">
+                                <i class="ti-trash btn-icon-prepend"></i>
+                                Delete @Model.Title
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+}

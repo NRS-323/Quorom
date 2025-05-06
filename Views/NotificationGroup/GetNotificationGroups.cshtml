@@ -1,0 +1,86 @@
+﻿@model List<Quorom.DbTables.NotificationGroup>
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <h3>Get Quorums / Notification Groups</h3>
+    <br />
+    <div class="card-header">
+        <a type="button" asp-controller="NotificationGroup" asp-action="AddNotificationGroup">
+            <div class="btn  btn-inverse-success">Add a Notification Group </div>
+        </a>
+    </div>
+    <br />
+</section>
+<section class="content">
+    <div class="card">
+        <div class="card-header text-info">
+            Quoroms are used to give access to specific Initiatives.
+            Notification Groups are employed to create a collection of cetain recipients to receive correspondence and or notifications (Internal or External).
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="order-listing" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center">NOTIFICATION GROUP ID</th>
+                                    <th style="text-align:center">NAME</th>
+                                    <th style="text-align:center">DESCRIPTION</th>
+                                    <th style="text-align:center">STATUS</th>
+                                    <th style="text-align:center">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td align="left" valign="middle" class="text-info">@item.NotificationGroupId</td>
+                                        <td align="left" valign="middle">@item.Name</td>
+                                        <td align="left" valign="middle">@item.Description</td>
+                                        @if (item.IsActive is true)
+                                        {
+                                            <td align="center" valign="middle">
+                                                <div class="btn btn-rounded btn-inverse-success btn-icon-text">
+                                                    <i class="icon-check"></i>
+                                                    Enabled
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td align="center" valign="middle">
+                                                <div class="btn btn-rounded btn-inverse-danger btn-icon-text">
+                                                    <i class="icon-close"></i>
+                                                    Disabled
+                                                </div>
+                                            </td>
+                                        }
+                                        <td align="right" valign="middle">
+                                            <a type="button" asp-controller="NotificationGroupQuoromite" asp-action="GetNotificationGroupQuoromite" asp-route-id="@item.NotificationGroupId">
+                                                <div class="btn btn-inverse-info btn-icon-text">
+                                                    <i class="ti-pencil btn-icon-prepend"></i>
+                                                    Review Quoromites
+                                                </div>
+                                            </a>
+                                            <a type="button" asp-controller="NotificationGroup" asp-action="UpdateNotificationGroup" asp-route-id="@item.NotificationGroupId">
+                                                <div class="btn btn-warning btn-icon-text">
+                                                    <i class="ti-pencil btn-icon-prepend"></i>
+                                                    Update Notification Group
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

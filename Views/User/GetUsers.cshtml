@@ -1,0 +1,100 @@
+﻿@using Quorom.DbTables
+@model IEnumerable<QuoromUser>
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <h3>User Records</h3>
+    <br />
+    <div class="card-footer">
+        <a type="button" class="btn badge-info btn-icon-text" asp-controller="Account" asp-action="Register">
+            <i class="ti-plus btn-icon-prepend"></i>
+            Add a new User
+        </a>
+    </div>
+    <br />
+</section>
+<section class="content">
+    <div class="card">
+        <div class="card-body">
+            @if (Model.Count() > 0)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table id="order-listing" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">EMAIL</th>
+                                        <th style="text-align:center">NAME</th>
+                                        <th style="text-align:center">ROLES</th>
+                                        <th style="text-align:center">ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="a_@item.Id">
+                                            <td align="left" valign="middle">@item.Email</td>
+                                            <td align="left" valign="middle">@item.FirstName @item.LastName</td>
+                                            <td align="left" valign="middle">@item.Role</td>
+                                            <td align="right" valign="middle">
+                                                <form method="post">
+                                                    @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
+                                                    {
+                                                        <button type="submit" class="btn btn-inverse-success btn-icon-text w100"
+                                                                asp-action="LockUnlock" asp-route-userId="@item.Id">
+                                                            <i class="fa fa-unlock btn-icon-prepend"></i>
+                                                            Lock User?
+                                                        </button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" class="btn btn-inverse-warning btn-icon-text w100"
+                                                                asp-action="LockUnlock" asp-route-userId="@item.Id">
+                                                            <i class="fa fa-lock btn-icon-prepend"></i>
+                                                            UnLock User?
+                                                        </button>
+                                                    }
+                                                    <a type="button" class="btn btn-inverse-info btn-icon-text"
+                                                       asp-action="ManageUserClaim" asp-route-userId="@item.Id" hidden>
+                                                        <i class="fa fa-edit"></i>
+                                                        Update Claims
+                                                    </a>
+                                                    <a type="button" class="btn btn-inverse-info btn-icon-text"
+                                                       asp-action="ManageRole" asp-route-userId="@item.Id">
+                                                        <i class="fa fa-edit"></i>
+                                                        Update Roles
+                                                    </a>
+                                                    <a type="button" class="btn btn-inverse-warning btn-icon-text"
+                                                       asp-action="Update" asp-route-userId="@item.Id" hidden>
+                                                        <i class="ti-pencil"></i>
+                                                        Update User
+                                                    </a>
+                                                    <button type="submit" class="btn btn-inverse-danger btn-icon-text"
+                                                            asp-action="DeleteUser" asp-route-userId="@item.Id"
+                                                            onclick="return confirm('Are you sure you want to delete this user?')">
+                                                        <i class="ti-trash btn-icon-prepend"></i>
+                                                        Delete User
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>No Users Found</p>
+            }
+
+        </div>
+    </div>
+</section>

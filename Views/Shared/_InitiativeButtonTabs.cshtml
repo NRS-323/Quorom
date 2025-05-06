@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+<!--BUTTON HEADERS-->
+<section class="mb-4">
+    <div class="d-flex justify-content-start border-bottom">
+        <div class="nav flex-nowrap" role="tablist">
+            <a class="nav-link active px-4 py-3 bg-light border rounded-top"
+               asp-controller="Initiative"
+               asp-action="UpdateInitiative"
+               asp-route-id="@Model.InitiativeId">
+                <i class="ti-pencil-alt me-2"></i>Initiative Details
+            </a>
+            <a class="nav-link active px-4 py-3 bg-light border rounded-top"
+               asp-controller="InitiativeTask"
+               asp-action="GetInitiativeTasks"
+               asp-route-id="@Model.InitiativeId">
+                <i class="ti-list me-2"></i>Task Agenda
+            </a>
+        </div>
+    </div>
+</section>

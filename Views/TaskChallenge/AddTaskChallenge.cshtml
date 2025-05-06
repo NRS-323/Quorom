@@ -1,0 +1,139 @@
+﻿@model TaskChallengeVM.AddTaskChallengeVM
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+</section>
+<style>
+    .form-label {
+        color: #2c3e50;
+        font-size: 1.1rem;
+    }
+
+    .form-control-lg {
+        border-radius: 0.8rem;
+        padding: 1rem 1.5rem;
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+    }
+
+    textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+</style>
+<div class="card shadow-lg">
+    <div class="card-header bg-danger text-white py-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h3 class="mb-0">
+                    <i class="ti-alert me-2"></i>Add New Challenge
+                    <span class="badge bg-white text-primary ms-2">@Model.TaskTitle</span>
+                </h3>
+            </div>
+            <a asp-controller="TaskChallenge" asp-action="GetTaskChallenges" 
+               asp-route-id="@Url.ActionContext.RouteData.Values["id"]"
+               class="btn btn-light">
+                <i class="ti-arrow-left me-2"></i>Back to Challenges
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <form method="post" class="needs-validation" novalidate>
+            <div class="row g-4">
+                <!-- Challenge Details -->
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">
+                            <i class="ti-pencil-alt me-2"></i>Challenge Title
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" 
+                               class="form-control form-control-lg" 
+                               asp-for="Title" 
+                               placeholder="Enter challenge title"
+                               required>
+                        <div class="invalid-feedback">
+                            Please provide a challenge title
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">
+                            <i class="ti-tag me-2"></i>Challenge Type
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-select form-select-lg" 
+                                asp-for="ChallengeTypeId" 
+                                asp-items="Model.ChallengeTypes"
+                                required>
+                            <option value="">Select Challenge Type</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a challenge type
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="col-12">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">
+                            <i class="ti-align-left me-2"></i>Description
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea class="form-control form-control-lg" 
+                                  asp-for="Description" 
+                                  rows="5"
+                                  placeholder="Detailed challenge description"
+                                  required></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a description
+                        </div>
+                        <small class="text-muted">
+                            <i class="ti-info-alt me-1"></i>
+                            The textarea will automatically expand as you type
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-end border-top pt-4">
+                <button type="submit" class="btn btn-danger btn-lg px-5">
+                    <i class="ti-save me-2"></i>Create Challenge
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        // Form validation
+        (function () {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+}
+

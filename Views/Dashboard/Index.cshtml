@@ -1,0 +1,535 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<QuoromUser> SignInManager
+@inject UserManager<QuoromUser> UserManager
+@model Quorom.ViewModels.Dashboard.DashboardViewModel
+@using System.Globalization
+
+@{
+    ViewBag.Title = "Dashboard";
+    var totalCompleted = Model.Quoromites.Sum(q => q.CompletedTasks);
+    var totalPending = Model.Quoromites.Sum(q => q.PendingTasks);
+    var totalTasks = totalCompleted + totalPending;
+}
+
+<!-- External Styles and Scripts -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="text-center my-4">
+    <img src="~/assets/images/quorom-logo.svg" alt="Quorom Logo" style="max-height: 100px;">
+</div>
+
+@*<div id="logo-animation" class="d-flex justify-content-center align-items-center vh-100 bg-white position-fixed top-0 start-0 w-100 z-index-9999">
+    <div id="logo-letters" class="d-flex gap-3">
+        <span class="logo-letter" data-icon="🕒">Q</span>
+        <span class="logo-letter" data-icon="📅">U</span>
+        <span class="logo-letter" data-icon="⏳">O</span>
+        <span class="logo-letter" data-icon="⏰">R</span>
+        <span class="logo-letter" data-icon="🧭">O</span>
+        <span class="logo-letter" data-icon="⚙️">M</span>
+    </div>
+</div>
+
+<style>
+    #logo-animation {
+        background-color: white;
+        z-index: 9999;
+    }
+
+    .logo-letter {
+        font-size: 4rem;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(100px);
+        position: relative;
+    }
+
+    .logo-letter::before {
+        content: attr(data-icon);
+        position: absolute;
+        font-size: 2rem;
+        top: -1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        animation: floatIcon 0.3s ease forwards;
+    }
+
+   @@keyframes floatIcon {
+        from {
+            transform: translate(-50%, 40px);
+            opacity: 0;
+        }
+        to {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+    }
+
+    @@keyframes riseIn {
+        0% {
+            opacity: 0;
+            transform: translateY(100px) scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+</style> *@
+
+
+<!-- Performance Distribution -->
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header text-center fw-bold fs-4">Performance Distribution</div>
+            <div class="card-body p-4">
+                <canvas id="performanceBarChart" style="min-height: 200px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Top and Bottom Performers -->
+<div class="row mb-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white fw-bold">
+                <i class="bi bi-trophy-fill me-2"></i>Top Performers
+            </div>
+            <ul class="list-group list-group-flush">
+                @{
+                    var topPerformers = Model.Quoromites
+                    .Where(q => q.TotalTasks > 0)
+                    .OrderByDescending(q => (double)q.CompletedTasks / q.TotalTasks)
+                    .Take(2)
+                    .ToList();
+                }
+                @foreach (var top in topPerformers)
+                {
+                    var topPercent = top.TotalTasks == 0 ? 0 : ((double)top.CompletedTasks / top.TotalTasks * 100);
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-stars text-warning me-2"></i>@top.FullName</span>
+                        <span class="badge bg-success rounded-pill">@topPercent.ToString("0")%</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white fw-bold">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>Bottom Performers
+            </div>
+            <ul class="list-group list-group-flush">
+                @{
+                    var bottomPerformers = Model.Quoromites
+                    .Where(q => q.TotalTasks > 0)
+                    .OrderBy(q => (double)q.CompletedTasks / q.TotalTasks)
+                    .Take(2)
+                    .ToList();
+                }
+                @foreach (var bottom in bottomPerformers)
+                {
+                    var bottomPercent = bottom.TotalTasks == 0 ? 0 : ((double)bottom.CompletedTasks / bottom.TotalTasks * 100);
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-arrow-down-circle-fill text-secondary me-2"></i>@bottom.FullName</span>
+                        <span class="badge bg-danger rounded-pill">@bottomPercent.ToString("0")%</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Toggle Controls -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-outline-primary" id="toggleViewBtn">Toggle View</button>
+    <input type="text" class="form-control w-50" id="searchInput" placeholder="Search by name or email..." />
+</div>
+
+<!-- Quoromites Card View -->
+<div id="cardsView" class="row g-4">
+    @foreach (var user in Model.Quoromites)
+    {
+        var progress = user.TotalTasks == 0 ? 0 : ((double)user.CompletedTasks / user.TotalTasks * 100);
+        var status = progress >= 90 ? "On Track" : progress >= 50 ? "Slacking" : "Behind";
+        var badgeClass = progress >= 90 ? "bg-success" : progress >= 50 ? "bg-warning text-dark" : "bg-danger";
+        var safeId = user.Email.Replace("@", "-at-").Replace(".", "-dot-");
+        <div class="col-md-6 col-lg-4 user-card" data-name="@user.FullName" data-email="@user.Email">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@user.FullName</h5>
+                    <p class="text-muted small">@user.Email</p>
+                    <canvas id="gauge-@safeId" width="120" height="120"></canvas>
+                    <div class="mt-2">
+                        <span class="badge @badgeClass">@status</span>
+                    </div>
+                    <div class="mt-3 text-start small text-secondary">
+                        <p>Total Tasks: <strong>@user.TotalTasks</strong></p>
+                        <p>Completed: <strong>@user.CompletedTasks</strong></p>
+                        <p>Pending: <strong>@user.PendingTasks</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Quoromites Table View -->
+<div id="tableView" class="table-responsive d-none mt-4">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Total</th>
+                <th>Completed</th>
+                <th>Pending</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Quoromites)
+            {
+                var progress = user.TotalTasks == 0 ? 0 : ((double)user.CompletedTasks / user.TotalTasks * 100);
+                var status = progress >= 90 ? "On Track" : progress >= 50 ? "Slacking" : "Behind";
+                var badgeClass = progress >= 90 ? "bg-success" : progress >= 50 ? "bg-warning text-dark" : "bg-danger";
+                <tr class="user-row" data-name="@user.FullName" data-email="@user.Email">
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>@user.TotalTasks</td>
+                    <td>@user.CompletedTasks</td>
+                    <td>@user.PendingTasks</td>
+                    <td><span class="badge @badgeClass">@status</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Initiative Progress Section -->
+<div class="mt-5">
+    <h3 class="mb-3">Initiative Progress</h3>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-outline-primary" id="toggleInitiativeViewBtn">Toggle View</button>
+        <input type="text" class="form-control w-50" id="initiativeSearchInput" placeholder="Search by title or owner..." />
+    </div>
+
+    <!-- Initiative Cards -->
+    <div id="initiativeCardsView" class="row g-4">
+        @foreach (var initiative in Model.Initiatives)
+        {
+            var progress = initiative.ProgressPercent;
+            var status = progress >= 90 ? "On Track" : progress >= 50 ? "Slacking" : "Behind";
+            var badgeClass = progress >= 90 ? "bg-success" : progress >= 50 ? "bg-warning text-dark" : "bg-danger";
+            var collapseId = $"membersCollapse-{initiative.InitiativeId}";
+            var buttonId = $"toggleButton-{initiative.InitiativeId}";
+            <div class="col-md-6 col-lg-4 initiative-card" data-title="@initiative.Title" data-owner="@initiative.Owner">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@initiative.Title</h5>
+                        <p class="text-muted small">@initiative.Owner</p>
+
+                        <div class="progress my-3" style="height: 20px;">
+                            <div class="progress-bar @badgeClass progress-bar-striped progress-bar-animated" role="progressbar" style="width: @progress%" aria-valuenow="@progress" aria-valuemin="0" aria-valuemax="100">
+                                @progress.ToString("0")%
+                            </div>
+                        </div>
+
+                        <div class="text-center mb-2">
+                            <span class="badge @badgeClass">@status</span>
+                        </div>
+
+                        <div class="text-start small text-secondary">
+                            <p>Status: <strong>@initiative.Status</strong></p>
+                            <p>Total Tasks: <strong>@initiative.TotalTasks</strong></p>
+                            <p>Completed: <strong>@initiative.CompletedTasks</strong></p>
+                            <p>Pending: <strong>@initiative.PendingTasks</strong></p>
+                        </div>
+
+                        @if (initiative.InvolvedUsers != null && initiative.InvolvedUsers.Any())
+                        {
+                            <!-- Toggle Button -->
+                            <button class="btn btn-sm btn-outline-secondary w-100 mb-2" type="button"
+                                    id="@buttonId"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#@collapseId"
+                                    aria-expanded="false"
+                                    aria-controls="@collapseId"
+                                    onclick="toggleButtonText('@buttonId', '@collapseId')">
+                                Show Members
+                            </button>
+
+                            <!-- Collapsible Member List -->
+                            <div class="collapse" id="@collapseId">
+                                <div class="card card-body p-2">
+                                    <ul class="list-unstyled mb-0 small">
+                                        @foreach (var member in initiative.InvolvedUsers)
+                                        {
+                                            <li>@member.FullName</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted small">No members assigned to tasks.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+
+
+    <!-- Initiative Table View -->
+    <div id="initiativeTableView" class="table-responsive d-none mt-4">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Owner</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Completed</th>
+                    <th>Pending</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var initiative in Model.Initiatives)
+                {
+                    var progress = initiative.ProgressPercent;
+                    var status = progress >= 90 ? "On Track" : progress >= 50 ? "Slacking" : "Behind";
+                    var badgeClass = progress >= 90 ? "bg-success" : progress >= 50 ? "bg-warning text-dark" : "bg-danger";
+                    <tr class="initiative-row" data-title="@initiative.Title" data-owner="@initiative.Owner">
+                        <td>@initiative.Title</td>
+                        <td>@initiative.Owner</td>
+                        <td><span class="badge @badgeClass">@status</span></td>
+                        <td>@initiative.TotalTasks</td>
+                        <td>@initiative.CompletedTasks</td>
+                        <td>@initiative.PendingTasks</td>
+                        <td>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar @badgeClass progress-bar-striped progress-bar-animated" role="progressbar" style="width: @progress%" aria-valuenow="@progress" aria-valuemin="0" aria-valuemax="100">@progress.ToString("0")%</div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        const users = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+        Model.Quoromites.Select(q => new
+        {
+           fullName = q.FullName,
+           email = q.Email,
+           completedTasks = q.CompletedTasks,
+           pendingTasks = q.PendingTasks,
+           safeId = q.Email.Replace("@", "-at-").Replace(".", "-dot-")
+        })));
+
+        const statusCounts = { "On Track": 0, "Slacking": 0, "Behind": 0 };
+        users.forEach(u => {
+            const total = u.completedTasks + u.pendingTasks;
+            const p = total === 0 ? 0 : (u.completedTasks / total) * 100;
+            if (p >= 90) statusCounts["On Track"]++;
+            else if (p >= 50) statusCounts["Slacking"]++;
+            else statusCounts["Behind"]++;
+        });
+
+        const barChartCtx = document.getElementById('performanceBarChart').getContext('2d');
+        const barChart = new Chart(barChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['On Track', 'Slacking', 'Behind'],
+                datasets: [{
+                    label: 'Number of Quoromites',
+                    data: [statusCounts["On Track"], statusCounts["Slacking"], statusCounts["Behind"]],
+                    backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+                    borderRadius: 8,
+                    barThickness: 30
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        },
+                        grid: {
+                            borderDash: [5, 5]
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const label = context.dataset.label || '';
+                                return `${label}: ${context.parsed.x}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gauge Charts
+        users.forEach(u => {
+            const ctx = document.getElementById(`gauge-${u.safeId}`)?.getContext('2d');
+            if (!ctx) return;
+            const total = u.completedTasks + u.pendingTasks;
+            const data = total === 0 ? [1] : [u.completedTasks, u.pendingTasks];
+            const backgroundColor = total === 0 ? ['#e5e7eb'] : ['#28a745', '#dc3545'];
+            const labels = total === 0 ? ['No Tasks'] : ['Completed', 'Pending'];
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data,
+                        backgroundColor,
+                        borderWidth: 0
+                    }],
+                    labels
+                },
+                options: {
+                    cutout: '70%',
+                    plugins: { legend: { display: false } }
+                }
+            });
+        });
+
+        // Toggle Card/Table Views
+        document.getElementById('toggleViewBtn').addEventListener('click', () => {
+            document.getElementById('cardsView').classList.toggle('d-none');
+            document.getElementById('tableView').classList.toggle('d-none');
+        });
+        document.getElementById('toggleInitiativeViewBtn').addEventListener('click', () => {
+            document.getElementById('initiativeCardsView').classList.toggle('d-none');
+            document.getElementById('initiativeTableView').classList.toggle('d-none');
+        });
+
+        // Search Filters
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const search = this.value.toLowerCase();
+            document.querySelectorAll('.user-card, .user-row').forEach(el => {
+                const name = el.dataset.name.toLowerCase();
+                const email = el.dataset.email.toLowerCase();
+                el.style.display = name.includes(search) || email.includes(search) ? '' : 'none';
+            });
+        });
+        document.getElementById('initiativeSearchInput').addEventListener('input', function () {
+            const search = this.value.toLowerCase();
+            document.querySelectorAll('.initiative-card, .initiative-row').forEach(el => {
+                const title = el.dataset.title.toLowerCase();
+                const owner = el.dataset.owner.toLowerCase();
+                el.style.display = title.includes(search) || owner.includes(search) ? '' : 'none';
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const letters = document.querySelectorAll(".logo-letter");
+
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.animation = "riseIn 0.8s ease-out forwards";
+                }, index * 400); // stagger each letter
+            });
+
+            // Fade out animation after all letters load
+            setTimeout(() => {
+                document.getElementById("logo-animation").style.transition = "opacity 1s ease";
+                document.getElementById("logo-animation").style.opacity = 0;
+                setTimeout(() => {
+                    document.getElementById("logo-animation").remove();
+                }, 1000);
+            }, letters.length * 400 + 1500); // wait for animation + pause
+        });
+    </script>
+
+    @{
+        var emailClaim = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Email)?.Value ?? "";
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Use the 'UserId' passed from the controller
+            const userId = '@Model.UserId'; // Access UserId from the model
+
+            // Replace non-alphanumeric characters with hyphens to ensure a valid identifier
+            const safeUserId = userId.replace(/[^a-zA-Z0-9]/g, "-");
+
+            // Create a sessionStorage key unique for this user and session
+            const animationKey = `quoromAnimationPlayed-${safeUserId}`;
+
+            // Check if the animation has already played during this session
+            const hasPlayed = sessionStorage.getItem(animationKey);
+
+            if (hasPlayed) {
+                // Hide the animation and show the main content immediately if already played
+                document.getElementById("logo-wrapper").style.display = "none";
+                document.getElementById("main-dashboard").style.opacity = 1;
+            } else {
+                // Show the animation and hide the main content during the animation
+                document.getElementById("logo-wrapper").style.display = "block";
+                document.getElementById("main-dashboard").style.opacity = 0;
+
+                // After animation, mark as played in sessionStorage
+                const totalAnimationTime = 600 + 100 * 6; // Total time of the animation
+                setTimeout(() => {
+                    // Make the main content visible
+                    document.getElementById("main-dashboard").style.opacity = 1;
+                    sessionStorage.setItem(animationKey, "true"); // Store in sessionStorage
+                }, totalAnimationTime + 200); // Wait until the animation is complete
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleButtonText(buttonId, collapseId) {
+            const button = document.getElementById(buttonId);
+            const collapse = document.getElementById(collapseId);
+
+            // Check if the collapse is showing after the toggle
+            setTimeout(() => {
+                if (collapse.classList.contains('show')) {
+                    button.textContent = 'Hide Members'; // Change button to 'Hide Members'
+                } else {
+                    button.textContent = 'Show Members'; // Change button back to 'Show Members'
+                }
+            }, 100); // 100ms delay for collapse to toggle
+        }
+    </script>
+
+}

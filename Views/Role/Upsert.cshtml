@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+@{
+    var title = "Create a Role";
+}
+<form method="post">
+    @if (Model != null && !String.IsNullOrEmpty(Model.NormalizedName))
+    {
+        title = "Update Role";
+        <input asp-for="@Model.Id" hidden />
+        <input asp-for="@Model.NormalizedName" hidden />
+    }
+    <section class="card-header">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+            </div>
+        </div>
+        <br />
+        <h3>@title</h3>
+        <br />
+        <div class="card-footer">
+            <a type="button" class="btn btn-info" asp-controller="Role" asp-action="GetRoles">
+                <i class="ti-plus btn-icon-prepend"></i>
+                Read All Roles
+            </a>
+        </div>
+        <br />
+    </section>
+    <section class="card-body">
+        <div class="col-md-3 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Role Name Information</h4>
+                    <p class="card-description">
+                        Details for the this Role Entry
+                    </p>
+                    @if (Model != null && !String.IsNullOrEmpty(Model.NormalizedName))
+                    {
+                        <div class="form-group">
+                            <input class="form-control" asp-for="Id" placeholder="Role Id" readonly>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Name" placeholder="Role Name">
+                        <span class="badge badge-danger badge-pill" asp-validation-for="Name"></span>
+                    </div>
+                </div>
+                <div class="card-footer right">
+                    @if (Model != null && !String.IsNullOrEmpty(Model.NormalizedName))
+                    {
+                        <input type="submit" class="btn btn-warning w-100" value="Update" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-primary w-100" value="Create" />
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

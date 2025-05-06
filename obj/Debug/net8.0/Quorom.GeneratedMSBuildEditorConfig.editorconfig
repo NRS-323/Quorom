@@ -1,0 +1,259 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Quorom
+build_property.RootNamespace = Quorom
+build_property.ProjectDir = C:\Users\nico.samaroo\source\repos\Quorom_1.1\Quorom\Quorom\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\nico.samaroo\source\repos\Quorom_1.1\Quorom\Quorom
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/AuthenticatorConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBdXRoZW50aWNhdG9yQ29uZmlybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/ChangePasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/EnableAuthenticator.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFbmFibGVBdXRoZW50aWNhdG9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/ForgotPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/Lockout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2Nrb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/ResetPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Account/VerifyAuthenticatorCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxWZXJpZnlBdXRoZW50aWNhdG9yQ29kZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/ChallengeType/AddChallengeType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbGxlbmdlVHlwZVxBZGRDaGFsbGVuZ2VUeXBlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/ChallengeType/GetChallengeTypes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbGxlbmdlVHlwZVxHZXRDaGFsbGVuZ2VUeXBlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/ChallengeType/UpdateChallengeType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhbGxlbmdlVHlwZVxVcGRhdGVDaGFsbGVuZ2VUeXBlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Home/SystemTables.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTeXN0ZW1UYWJsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/InitiativeTask/AddInitiativeTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVRhc2tcQWRkSW5pdGlhdGl2ZVRhc2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/InitiativeTask/GetInitiativeTasks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVRhc2tcR2V0SW5pdGlhdGl2ZVRhc2tzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/InitiativeTask/UpdateInitiativeTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVRhc2tcVXBkYXRlSW5pdGlhdGl2ZVRhc2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/InitiativeType/AddInitiativeType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVR5cGVcQWRkSW5pdGlhdGl2ZVR5cGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/InitiativeType/GetInitiativeTypes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVR5cGVcR2V0SW5pdGlhdGl2ZVR5cGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/InitiativeType/UpdateInitiativeType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVR5cGVcVXBkYXRlSW5pdGlhdGl2ZVR5cGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Initiative/AddInitiative.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVxBZGRJbml0aWF0aXZlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Initiative/GetInitiatives.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVxHZXRJbml0aWF0aXZlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Initiative/UpdateInitiative.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pdGlhdGl2ZVxVcGRhdGVJbml0aWF0aXZlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/MyActivities/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTXlBY3Rpdml0aWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/NotificationGroupQuoromite/AddMultipleQuoromites.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uR3JvdXBRdW9yb21pdGVcQWRkTXVsdGlwbGVRdW9yb21pdGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/NotificationGroupQuoromite/AddNotificationGroupQuoromite.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uR3JvdXBRdW9yb21pdGVcQWRkTm90aWZpY2F0aW9uR3JvdXBRdW9yb21pdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/NotificationGroupQuoromite/GetNotificationGroupQuoromite.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uR3JvdXBRdW9yb21pdGVcR2V0Tm90aWZpY2F0aW9uR3JvdXBRdW9yb21pdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/NotificationGroupQuoromite/UpdateNotificationGroupQuoromite.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uR3JvdXBRdW9yb21pdGVcVXBkYXRlTm90aWZpY2F0aW9uR3JvdXBRdW9yb21pdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/NotificationGroup/AddNotificationGroup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uR3JvdXBcQWRkTm90aWZpY2F0aW9uR3JvdXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/NotificationGroup/GetNotificationGroups.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uR3JvdXBcR2V0Tm90aWZpY2F0aW9uR3JvdXBzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/NotificationGroup/UpdateNotificationGroup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2F0aW9uR3JvdXBcVXBkYXRlTm90aWZpY2F0aW9uR3JvdXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Role/GetRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxHZXRSb2xlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Role/Upsert.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxVcHNlcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Shared/_InitiativeButtonTabs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Jbml0aWF0aXZlQnV0dG9uVGFicy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Shared/_Notifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Shared/_SystemTablesButtonTabs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TeXN0ZW1UYWJsZXNCdXR0b25UYWJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/TaskChallenge/AddTaskChallenge.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0NoYWxsZW5nZVxBZGRUYXNrQ2hhbGxlbmdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/TaskChallenge/GetTaskChallenges.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0NoYWxsZW5nZVxHZXRUYXNrQ2hhbGxlbmdlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/TaskChallenge/UpdateTaskChallenge.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0NoYWxsZW5nZVxVcGRhdGVUYXNrQ2hhbGxlbmdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/TaskType/AddTaskType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1R5cGVcQWRkVGFza1R5cGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/TaskType/GetTaskTypes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1R5cGVcR2V0VGFza1R5cGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/TaskType/UpdateTaskType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza1R5cGVcVXBkYXRlVGFza1R5cGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/User/GetUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxHZXRVc2Vycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/User/ManageRole.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxNYW5hZ2VSb2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/User/ManageUserClaim.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxNYW5hZ2VVc2VyQ2xhaW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nico.samaroo/source/repos/Quorom_1.1/Quorom/Quorom/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-z78d6otiql

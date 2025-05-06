@@ -1,0 +1,100 @@
+﻿@model Quorom.ViewModels.MyActivities.MyActivitiesViewModel
+
+@{
+    ViewData["Title"] = "My Activities";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary"><i class="mdi mdi-account-check-outline"></i> My Activities</h2>
+
+    @if (!Model.InitiativeActivities.Any())
+    {
+        <div class="alert alert-info">You are not currently assigned to any initiatives.</div>
+    }
+    else
+    {
+        @foreach (var initiative in Model.InitiativeActivities)
+        {
+            var progressPercent = initiative.TotalTasks > 0
+            ? (int)Math.Round((double)initiative.CompletedTasks / initiative.TotalTasks * 100)
+            : 0;
+
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center bg-light">
+                    <h5 class="mb-0 text-dark"><i class="mdi mdi-lightbulb-on-outline text-warning"></i> @initiative.Title</h5>
+                    <span class="badge bg-@GetStatusColor(initiative.Status)">
+                        <i class="mdi mdi-circle"></i> @initiative.Status
+                    </span>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted"><strong>Objective:</strong> @initiative.Objective</p>
+
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Overall Progress:</strong></label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                 role="progressbar"
+                                 style="width: @progressPercent%;">
+                                @progressPercent%
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (initiative.UserTasks.Any())
+                    {
+                        <h6 class="mt-4 text-secondary"><i class="mdi mdi-clipboard-text-outline"></i> My Tasks</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered mt-2">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Status</th>
+                                        <th>Due Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var task in initiative.UserTasks)
+                                    {
+                                        <tr>
+                                            <td>@task.Title</td>
+                                            <td>
+                                                @if (task.IsCompleted)
+                                                {
+                                                    <span class="badge bg-success"><i class="mdi mdi-check-circle-outline"></i> Completed</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning text-dark"><i class="mdi mdi-progress-clock"></i> In Progress</span>
+                                                }
+                                            </td>
+                                            <td>@task.DueDate?.ToString("MMM dd, yyyy")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-secondary mt-3">You have no assigned tasks in this initiative.</div>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@functions {
+    private string GetStatusColor(string status)
+    {
+        return status switch
+        {
+            "In Progress" => "warning",
+            "Completed" => "success",
+            "On Hold" => "secondary",
+            "Not Started" => "info",
+            _ => "light"
+        };
+    }
+}

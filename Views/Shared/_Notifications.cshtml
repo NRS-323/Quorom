@@ -1,0 +1,32 @@
+﻿@if (TempData[MyConstants.Messages.Success] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="mdi mdi-checkbox-marked-circle"></i>
+        @TempData[MyConstants.Messages.Success]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData[MyConstants.Messages.Information] != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="mdi mdi-information"></i>
+        @TempData[MyConstants.Messages.Information]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData[MyConstants.Messages.Warning] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="mdi mdi-pause-circle"></i>
+        @TempData[MyConstants.Messages.Warning]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData[MyConstants.Messages.Error] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="mdi mdi-alert"></i>
+        @TempData[MyConstants.Messages.Error]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}

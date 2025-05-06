@@ -1,0 +1,12 @@
+/* Google Charts */
+
+.google-chart-container {
+  overflow: hidden;
+
+  .google-charts {
+    width: 100%;
+    height: 280px;
+    min-height: 280px;
+    min-width: 100%;
+  }
+}

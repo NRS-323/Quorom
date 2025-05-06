@@ -1,0 +1,78 @@
+﻿@model List<Quorom.DbTables.InitiativeType>
+<section class="card-header">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <img src="@Url.Content(ViewBag.BannerImageUrl)" alt="Banner Image" class="img-fluid" />
+        </div>
+    </div>
+    <br />
+    <h3>Initiative Type List</h3>
+    <br />
+    <div class="card-footer">
+        <a type="button" class="btn btn-inverse-info btn-icon-text" asp-controller="InitiativeType" asp-action="AddInitiativeType">
+            <i class="mdi mdi-account-plus btn-icon-prepend"></i>
+            Add an Initiative Type
+        </a>
+    </div>
+    <br />
+</section>
+<section class="content">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table id="order-listing" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">INITIATIVE TYPE ID</th>
+                                        <th style="text-align:center">TITLE</th>
+                                        <th style="text-align:center">DESCRIPTION</th>
+                                        <th style="text-align:center">STATUS</th>
+                                        <th style="text-align:center">ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td align="left" valign="middle">@item.InitiativeTypeId</td>
+                                            <td align="left" valign="middle">@item.Title</td>
+                                            <td align="left" valign="middle">@item.Description</td>
+                                            @if (@item.IsActive == true)
+                                            {
+                                                <td align="center" valign="middle">
+                                                    <div class="btn btn-rounded btn-inverse-success btn-icon-text">
+                                                        <i class="icon-check"></i>
+                                                        Active
+                                                    </div>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td align="center" valign="middle">
+                                                    <div class="btn btn-rounded btn-inverse-danger btn-icon-text">
+                                                        <i class="icon-close"></i>
+                                                        Inactive
+                                                    </div>
+                                                </td>
+                                            }
+                                            <td align="right" valign="middle">
+                                                <a type="button" class="btn btn-primary btn-icon-text"
+                                                   asp-controller="InitiativeType" asp-action="UpdateInitiativeType" asp-route-id="@item.InitiativeTypeId">
+                                                    <i class="ti-pencil"></i>
+                                                    Review @item.Title
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
